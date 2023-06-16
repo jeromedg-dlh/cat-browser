@@ -1,4 +1,4 @@
-export type Cat = {
+export type ICat = {
   adaptability: number
   affection_level: number
   alt_names: string
@@ -38,9 +38,13 @@ export type Cat = {
   wikipedia_url: string
 };
 
-export type CatInfo = {
+export type ICatImage = {
   height: number
   id: string
   url: string
   width: number
+}
+
+export interface ISingleCat extends ICatImage {
+  breeds: ICat[]
 }

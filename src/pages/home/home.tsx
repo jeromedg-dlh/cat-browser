@@ -3,8 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import axios from 'axios';
 import styles from './home.module.scss';
-import { CatInfo } from '../../types';
-import CustomCard from '../../components/card';
+import { ICatImage } from '../../interfaces';
+import { CustomCard } from '../../components';
 import { useCatsContext } from '../../context/CatsContext';
 
 const ITEMS_PER_PAGE = 10;
@@ -58,8 +58,8 @@ export const Home: React.FC = () => {
       )
       .then(response => {
         setCats(prevState => {
-          const newCats: CatInfo[] = response.data.filter(
-            (cat: CatInfo) => !prevState?.find(oldCat => oldCat.id === cat.id)
+          const newCats: ICatImage[] = response.data.filter(
+            (cat: ICatImage) => !prevState?.find(oldCat => oldCat.id === cat.id)
           );
 
           if (newCats.length === 0) setNoMoreData(true);

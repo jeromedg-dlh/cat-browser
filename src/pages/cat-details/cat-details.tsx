@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import CustomCard from '../../components/card';
+import { CustomCard } from '../../components';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
-import { Cat, CatInfo } from '../../types';
-import styles from './cat-details.module.css';
-
-interface ISingleCat extends CatInfo {
-  breeds: Cat[]
-}
+import { ISingleCat } from '../../interfaces';
+import './cat-details.css';
 
 export const CatDetails: React.FC = () => {
   const [cat, setCat] = useState<ISingleCat>();
@@ -26,21 +22,21 @@ export const CatDetails: React.FC = () => {
   },[id, setCat]);
 
   return (
-    <div className={styles.wrapper}>
+    <div className="wrapper">
       {cat &&
         <CustomCard
           header={
             <Link to={`/?breed=${cat.breeds[0].id}`}>
-              <Button variant="info" className={styles.backButton}>Back</Button>
+              <Button variant="info" className="backButton">Back</Button>
             </Link>
           }
           key={id}
           imgSrc={cat.url}
         >
-          <h3>{cat.breeds[0].name}</h3>
-          <h4>Origin: {cat.breeds[0].origin}</h4>
-          <h5>{cat.breeds[0].temperament}</h5>
-          <p>{cat.breeds[0].description}</p>
+          <h3>{cat?.breeds?.[0]?.name ?? "No breed name"}</h3>
+          <h4>Origin: {cat?.breeds?.[0]?.origin ?? "N/A"}</h4>
+          <h5>{cat?.breeds?.[0]?.temperament ?? "No temperament available"}</h5>
+          <p>{cat?.breeds?.[0]?.description ?? "No description available"}</p>
         </CustomCard>
       }
     </div>
